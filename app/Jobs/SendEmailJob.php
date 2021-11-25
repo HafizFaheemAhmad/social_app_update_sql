@@ -26,7 +26,7 @@ class SendEmailJob implements ShouldQueue
      * @return void
      */
     public $details, $email, $password;
-    public function __construct($details = "", $email = "")
+    public function __construct($details, $email)
     {
         $this->details = $details;
         $this->email = $email;
@@ -41,6 +41,6 @@ class SendEmailJob implements ShouldQueue
     {
         $email = new verifyemail(RegisterController::$detail);
 
-        \Mail::to($this->email)->send(new verifyemail($this->details));
+        Mail::to($this->email)->send(new verifyemail($this->details));
     }
 }
