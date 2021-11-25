@@ -37,8 +37,8 @@ class RegisterController extends Controller
             $email_varified_token = base64_encode($input['name']);
             $input['varified_token'] = $email_varified_token;
             $input['password'] = bcrypt($input['password']);
-            $details['email'] = $input['email'];
-            $input['profile_image'] = $file_name;
+            $details= $input['email'];
+            //$input['profile_image'] = $file_name;
             $user = User::create($input);
             //generate URL link
             dispatch(new SendEmailJob($details['email']));
@@ -54,7 +54,6 @@ class RegisterController extends Controller
 
 //For email verification on registration
     public function emailVarify($email, $token)
-
     {
         try {
             $user = User::where('email', $email)->where('varified_token', $token)->first();
@@ -70,8 +69,8 @@ class RegisterController extends Controller
                 return ResponseServiceProvider::sendResponse($success, 200);
             } else {
                 //send responsed if Email link  is already use
-                $success['message'] =  "'Unauthorised.', ['error' => 'Link already used', 'detail' => 'this link already in use please create anotherone'";
-                throw new Exception($success['message']);
+                $error_message['message'] =  "'Unauthorised.', ['error' => 'Link already used', 'detail' => 'this link already in use please create anotherone'";
+                throw new Exception($error_message['message']);
             }
         } catch (\Exception $ex) {
             return ResponseServiceProvider::sendError(['error' => $ex->getMessage()], 500);

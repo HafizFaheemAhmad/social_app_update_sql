@@ -20,7 +20,6 @@ class ForgotPasswordController extends Controller
             $input = $request->validated();
             $user_data = User::where('email', $input['email'])->first();
             $string = "ABC";
-
             $password = substr(str_shuffle(str_repeat($string, 12)), 0, 12);
             $user_data->password = bcrypt($password);
             $user_data->save();

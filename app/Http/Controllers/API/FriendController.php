@@ -35,12 +35,12 @@ class FriendController extends Controller
                     $success['message'] = "you are friend now of $fid";
                     return ResponseServiceProvider::sendResponse($success, 200);
                 } else {
-                    $success['message'] = "User with id = $fid is already your friend";
-                    throw new Exception($success['message']);
+                    $error_message['message'] = "User with id = $fid is already your friend";
+                    throw new Exception($error_message['message']);
                 }
             } else {
-                $success['message'] = "you are not allow to be friend of yourself";
-                throw new Exception($success['message']);
+                $error_message['message'] = "you are not allow to be friend of yourself";
+                throw new Exception($error_message['message']);
             }
         } catch (\Exception $ex) {
             return response()->json(['error' => $ex->getMessage()], 500);
@@ -60,8 +60,8 @@ class FriendController extends Controller
                 $success['message'] = "Unfriend Successfuly";
                 return ResponseServiceProvider::sendResponse($success, 200);
             } else {
-                $success['message'] = "You are not the friend of $fid";
-                throw new Exception($success['message']);
+                $error_message['message'] = "You are not the friend of $fid";
+                throw new Exception($error_message['message']);
             }
         } catch (\Exception $ex) {
             return response()->json(['error' => $ex->getMessage()], 500);

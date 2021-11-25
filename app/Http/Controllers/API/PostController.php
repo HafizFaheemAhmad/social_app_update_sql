@@ -109,11 +109,11 @@ class PostController extends Controller
                 $success['message'] =  "Post Deleted Successfully";
                 return ResponseServiceProvider::sendResponse($success, 200);
             } else {
-                $success['message'] =  "Post not exist";
-                throw new Exception($success['message']);
+                $error_message['message'] =  "Post not exist";
+                throw new Exception($error_message['message']);
             }
-        } catch (\Exception $success) {
-            throw new Exception($success['message']);
+        } catch (\Exception $ex) {
+            return response()->json(['error' => $ex->getMessage()], 500);
         }
     }
 }

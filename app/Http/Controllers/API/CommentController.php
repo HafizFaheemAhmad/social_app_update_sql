@@ -80,8 +80,8 @@ class CommentController extends Controller
                     return ResponseServiceProvider::sendResponse($success, 200);
                 }
             } else {
-                $success['message'] =  "Something went wrong";
-                throw new Exception($success['message']);
+                $error_message['message'] =  "Something went wrong";
+                throw new Exception($error_message['message']);
             }
         } catch (\Exception $ex) {
             return response()->json(['error' => $ex->getMessage()], 500);

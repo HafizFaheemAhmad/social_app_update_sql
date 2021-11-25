@@ -55,8 +55,8 @@ class UserController extends Controller
                 $success['message'] =  " User Successful Logout.";
                 return ResponseServiceProvider::sendResponse($success, 200);
             } else {
-                $success['message'] =  "Something went Worng!";
-                throw new Exception($success['message']);
+                $error_message['message'] =  "Something went Worng!";
+                throw new Exception($error_message['message']);
             }
         } catch (\Exception $ex) {
             return ResponseServiceProvider::sendError(['error' => $ex->getMessage()], 500);
@@ -74,8 +74,8 @@ class UserController extends Controller
                 $success['message'] =  " User Successfully Delete.";
                 return ResponseServiceProvider::sendResponse($success, 200);
             } else {
-                $success['message'] =  "User not exist";
-                throw new Exception($success['message']);
+                $error_message['message'] =  "User not exist";
+                throw new Exception($error_message['message']);
             }
         } catch (\Exception $ex) {
             return response()->json(['error' => $ex->getMessage()], 500);
@@ -114,8 +114,8 @@ class UserController extends Controller
                 $success['message'] =  "User Updated Successfully";
                 return ResponseServiceProvider::sendResponse($success, 200);
             } else {
-                $success['message'] =  "Something went Worng!";
-                throw new Exception($success['message']);
+                $error_message['message'] =  "Something went Worng!";
+                throw new Exception($error_message['message']);
             }
         } catch (\Exception $ex) {
             return response()->json(['error' => $ex->getMessage()], 500);
